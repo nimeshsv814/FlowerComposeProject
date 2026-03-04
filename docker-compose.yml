@@ -1,27 +1,27 @@
 version: '3.8'
 
 services:
-  # flower-app-web:
-  #   image: nimeshsv814/flower-app:v1.1.0
-  #   container_name: flower-app
-  #   ports:
-  #     - "3016:3015"
-  #   environment:
-  #     MONGO_URI: mongodb://mongodb-cont:27017/AFF-Docker
-  #   depends_on:
-  #     - flower-mongodb
-  #   networks:
-  #     - flower-network
+  flower-app-web:
+    image: nimeshsv814/flower-app:v1.1.0
+    container_name: flower-app
+    ports:
+      - "3016:3015"
+    environment:
+      MONGO_URI: mongodb://mongodb-cont:27017/AFF-Docker
+    depends_on:
+      - flower-mongodb
+    networks:
+      - flower-network
 
-  # flower-mongodb:
-  #   image: mongo
-  #   container_name: mongodb-cont
-  #   ports:
-  #     - "27017:27017"
-  #   volumes:
-  #     - mongo_data:/data/db
-  #   networks:
-  #     - flower-network
+  flower-mongodb:
+    image: mongo
+    container_name: mongodb-cont
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - flower-network
   
   retail-frontend:
     image: nimeshsv814/retail-app:v1.1.0
@@ -40,7 +40,7 @@ services:
       - retail-backend
   
   retail-backend:
-    image: mysql:8.0
+    image: mysql
     container_name: retail-back-cont
     ports:
       - "3306:3306"
@@ -55,7 +55,7 @@ services:
       - MYSQL_ROOT_PASSWORD=root_pass
 
 volumes:
-  #mongo_data:
+  mongo_data:
   sql_data:
 
 networks:
