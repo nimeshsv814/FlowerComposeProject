@@ -40,7 +40,7 @@ services:
       - retail-backend
   
   retail-backend:
-    image: mysql
+    image: mysql:8.0
     container_name: retail-back-cont
     ports:
       - "3306:3306"
