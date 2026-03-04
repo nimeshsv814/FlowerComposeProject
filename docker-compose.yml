@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  flower-app-web:
+    image: nimeshsv814/flower-app:v1.1.0
+    container_name: flower-app
+    ports:
+      - "3016:3015"
+    environment:
+      MONGO_URI: mongodb://mongodb-cont:27017/AFF-Docker
+    depends_on:
+      - flower-mongodb
+    networks:
+      - flower-network
+
+  flower-mongodb:
+    image: mongo
+    container_name: mongodb-cont
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - flower-network
+
+volumes:
+  mongo_data:
+
+networks:
+  flower-network:
