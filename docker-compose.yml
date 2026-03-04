@@ -22,9 +22,41 @@ services:
       - mongo_data:/data/db
     networks:
       - flower-network
+  
+  retail-frontend:
+    image: nimeshsv814/retail-app:v1.1.0
+    container_name: retail-front-cont
+    ports:
+      - "82:3000"
+    networks:
+      - flower-network
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=retail_user
+      - DB_PASSWORD=retail_pass
+      - DB_NAME=retail
+    depends_on:
+      - retail-backend
+  
+  retail-backend:
+    image: mysql
+    container_name: retail-back-cont
+    ports:
+      - "3306:3306"
+    volumes:
+      - sql_data:/var/lib/mysql
+    networks:
+      - flower-network
+    environment:
+      - MYSQL_DATABASE=retail
+      - MYSQL_USER=retail_user
+      - MYSQL_PASSWORD=retail_pass
+      - MYSQL_ROOT_PASSWORD=root_pass
 
 volumes:
   mongo_data:
+  sql_data:
 
 networks:
   flower-network:
