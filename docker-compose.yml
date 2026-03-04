@@ -31,7 +31,7 @@ services:
     networks:
       - flower-network
     environment:
-      - DB_HOST=mysql
+      - DB_HOST=retail-back-cont
       - DB_PORT=3306
       - DB_USER=retail_user
       - DB_PASSWORD=retail_pass
